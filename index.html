@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>Студия Вышивки | Эксклюзивная вышивка на одежде</title>
+    <style>
+        /* ---------- Базовые сбросы ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            color: #1a1a2e;
+            background: #fcf9f5;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ---------- Шапка / Навигация ---------- */
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid #e94560;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 1.5em;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
+        }
+        .logo span {
+            background: linear-gradient(135deg, #e94560, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        .logo .diamond {
+            color: #feca57;
+            -webkit-text-fill-color: #feca57;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #dfe6e9;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #e94560, #feca57);
+            transition: width 0.3s;
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+        nav a:hover {
+            color: #feca57;
+        }
+
+        /* ---------- Главный экран (Hero) с фоном из ниток Madera ---------- */
+        .hero {
+            background: 
+                /* Затемнение для читаемости текста */
+                linear-gradient(135deg, rgba(26, 26, 46, 0.75), rgba(15, 52, 96, 0.80)),
+                /* Ваше изображение с нитками Madera */
+                url('https://i5.storeland.net/2/3710/137093170/afacdb/vyshivalnye-nitki-madeira-rayon-40-1000m.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Эффект наложения для красоты */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(233, 69, 96, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(254, 202, 87, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(106, 13, 173, 0.10) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to top, #fcf9f5, transparent);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5em, 8vw, 4.5em);
+            font-weight: 200;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+        }
+        .hero h1 strong {
+            background: linear-gradient(135deg, #e94560, #feca57, #6a0dad, #00b894, #e94560);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            animation: gradientShift 5s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero p {
+            font-size: clamp(1em, 2vw, 1.4em);
+            max-width: 600px;
+            margin-bottom: 35px;
+            opacity: 0.95;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            color: #dfe6e9;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #e94560, #c0392b);
+            color: white;
+            padding: 18px 50px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 30px rgba(233, 69, 96, 0.5);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+        .btn:hover::before {
+            transform: rotate(45deg) scale(1.5);
+        }
+        .btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 45px rgba(233, 69, 96, 0.7);
+        }
+
+        /* ---------- Основной контент ---------- */
+        .main-content {
+            max-width: 1100px;
+            margin: -40px auto 0;
+            padding: 0 20px 50px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            flex: 1;
+            position: relative;
+            z-index: 3;
+        }
+
+        .services h2 {
+            font-size: 2em;
+            font-weight: 300;
+            color: #1a1a2e;
+            margin-bottom: 30px;
+            border-left: 5px solid #e94560;
+            padding-left: 20px;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #e94560, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 2px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e94560, #feca57, #6a0dad);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 45px rgba(0,0,0,0.12);
+            border-color: rgba(233, 69, 96, 0.3);
+        }
+        .service-card h3 {
+            color: #1a1a2e;
+            font-size: 1.15em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .service-card p {
+            font-size: 0.95em;
+            color: #555;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ---------- Портфолио ---------- */
+        .portfolio {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        .portfolio h2 {
+            font-size: 2em;
+            font-weight: 300;
+            color: #1a1a2e;
+            margin-bottom: 30px;
+            border-left: 5px solid #e94560;
+            padding-left: 20px;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #e94560, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 20px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 2px dashed #e8e4de;
+            background: linear-gradient(135deg, #fff, #f8f5f0);
+            cursor: default;
+        }
+        .portfolio-item:nth-child(1) { border-color: #e94560; }
+        .portfolio-item:nth-child(2) { border-color: #feca57; }
+        .portfolio-item:nth-child(3) { border-color: #6a0dad; }
+        .portfolio-item:nth-child(4) { border-color: #00b894; }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 45px rgba(0,0,0,0.1);
+        }
+        .portfolio-item .icon {
+            font-size: 3.5em;
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+        .portfolio-item .label {
+            color: #555;
+            font-size: 0.95em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .portfolio-item .coming {
+            color: #b3a89a;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+
+        /* Правая колонка */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .widget {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .widget h3 {
+            color: #1a1a2e;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e94560, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contacts-list {
+            list-style: none;
+        }
+
+        .contacts-list li {
+            margin-bottom: 14px;
+            font-size: 0.95em;
+            color: #555;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .contacts-list li:hover {
+            background: rgba(233, 69, 96, 0.05);
+        }
+
+        .contacts-list strong {
+            color: #1a1a2e;
+        }
+
+        .contacts-list a {
+            color: #2d2d2d;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contacts-list a:hover {
+            color: #e94560;
+        }
+
+        .color-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #f0ede8;
+            flex-wrap: wrap;
+        }
+        .color-dots span {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .color-dots span:hover {
+            transform: scale(1.2);
+        }
+
+        /* ---------- Подвал ---------- */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #a0aab5;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: auto;
+            border-top: 3px solid #e94560;
+        }
+        footer a {
+            color: #feca57;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #e94560;
+            text-decoration: underline;
+        }
+        footer .footer-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #e94560, #feca57, #6a0dad);
+            margin: 15px auto;
+            border-radius: 10px;
+        }
+
+        /* ---------- Медиа-запросы ---------- */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                margin-top: 20px;
+            }
+            header {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+            nav ul {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2em;
+                letter-spacing: 2px;
+            }
+            nav ul {
+                gap: 12px;
+            }
+            nav a {
+                font-size: 0.85em;
+            }
+            .btn {
+                padding: 14px 30px;
+                font-size: 0.95em;
+            }
+            .service-card {
+                padding: 20px 18px;
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><span class="diamond">✦</span> <span>Вышивка Стиль</span></div>
+        <nav>
+            <ul>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Эксклюзивная <strong>вышивка</strong><br>на вашей одежде</h1>
+            <p>Создаем уникальный стиль, брендируем корпоративную одежду и воплощаем любые ваши идеи в нитях с гарантией качества.</p>
+            <a href="#contacts" class="btn">Рассчитать стоимость</a>
+        </div>
+    </section>
+
+    <main class="main-content" id="services">
+        <section class="services">
+            <h2>Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>🎨 Индивидуальный дизайн</h3>
+                    <p>Вышьем ваш рисунок, надпись или логотип на худи, футболках и свитшотах.</p>
+                </div>
+                <div class="service-card">
+                    <h3>👔 Корпоративный мерч</h3>
+                    <p>Брендирование униформы для вашего бизнеса тиражом от 1 шт.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🛡️ Шевроны и патчи</h3>
+                    <p>Изготовление нашивок любой сложности с креплением на липучке или термопленке.</p>
+                </div>
+            </div>
+        </section>
+
+        <aside class="sidebar" id="contacts">
+            <div class="widget">
+                <h3>📬 Свяжитесь с нами</h3>
+                <ul class="contacts-list">
+                    <li><strong>Телефон:</strong> <a href="tel:+79776975580">+7 (977) 697-55-80</a></li>
+                    <li><strong>Email:</strong> <a href="mailto:imaklain@gmail.com">imaklain@gmail.com</a></li>
+                    <li><strong>Режим работы:</strong> Пн–Пт, 10:00 – 20:00</li>
+                </ul>
+                <div class="color-dots">
+                    <span style="background: #e94560;" title="Красный"></span>
+                    <span style="background: #feca57;" title="Жёлтый"></span>
+                    <span style="background: #6a0dad;" title="Фиолетовый"></span>
+                    <span style="background: #00b894;" title="Изумрудный"></span>
+                    <span style="background: #0984e3;" title="Синий"></span>
+                    <span style="background: #fd79a8;" title="Розовый"></span>
+                    <span style="background: #fdcb6e;" title="Золотой"></span>
+                    <span style="background: #e17055;" title="Терракотовый"></span>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <section class="portfolio" id="portfolio">
+        <h2>Наше портфолио</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <span class="icon">👕</span>
+                <span class="label">Вышивка на одежде</span>
+                <span class="coming">Скоро добавим</span>
+            </div>
+            <div class="portfolio-item">
+                <span class="icon">🧢</span>
+                <span class="label">Брендирование кепок</span>
+                <span class="coming">Скоро добавим</span>
+            </div>
+            <div class="portfolio-item">
+                <span class="icon">🧥</span>
+                <span class="label">Корпоративные куртки</span>
+                <span class="coming">Скоро добавим</span>
+            </div>
+            <div class="portfolio-item">
+                <span class="icon">🎒</span>
+                <span class="label">Вышивка на рюкзаках</span>
+                <span class="coming">Скоро добавим</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Студия Вышивки. Все права защищены.</p>
+        <div class="footer-divider"></div>
+        <p style="font-size: 0.85em; opacity: 0.8;">
+            <a href="mailto:imaklain@gmail.com">imaklain@gmail.com</a> · 
+            <a href="tel:+79776975580">+7 (977) 697-55-80</a>
+        </p>
+    </footer>
+
+</body>
+</html>
